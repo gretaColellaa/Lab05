@@ -7,7 +7,8 @@ def get_connection() -> mysql.connector.connection:
         cnx = mysql.connector.connect(
             option_files='./database/connector.cnf'
         )
-        return cnx
+        if cnx is not None:
+            return cnx
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
             print("Something is wrong with your user name or password")
@@ -20,5 +21,4 @@ def get_connection() -> mysql.connector.connection:
             return None
 
 
-class DBConnect:
-    pass
+
